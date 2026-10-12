@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#1e2341">
+<meta name="description" content="A simple calculator for Google Search Console generative AI and total Web Search impressions.">
+<title>AI Search Presence Calculator | The Polka</title>
+<style>
+:root{font-family:Inter,Arial,sans-serif;color:#222640;background:#f8f7f3;font-synthesis:none}
+*{box-sizing:border-box}body{margin:0}button,input{font:inherit}
+header,main,footer{max-width:1100px;margin:auto;padding-left:24px;padding-right:24px}
+header{padding-top:24px;padding-bottom:24px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.logo{font-size:27px;font-weight:850;letter-spacing:-1.8px}.logo span{color:#e9639b}
+.tag,.eyebrow{font-size:11px;letter-spacing:1.7px;font-weight:800}
+.tag{border:1px solid #d0d1d9;border-radius:20px;padding:9px 14px}
+.hero{padding:48px 0 42px;max-width:800px}.eyebrow{color:#a24a80}
+h1{font-size:clamp(38px,6.5vw,70px);line-height:1.05;letter-spacing:-2.6px;margin:20px 0}
+h1 em{font-style:normal;color:#a85488}.hero p{font-size:18px;line-height:1.65;max-width:680px;color:#666977}
+h2{font-size:clamp(24px,3vw,32px);letter-spacing:-.8px;margin:8px 0 18px}
+h3{font-size:19px;margin:0 0 8px}.muted{color:#646878;line-height:1.6}
+.columns{display:grid;grid-template-columns:1.07fr .93fr;gap:16px}
+.card{border:1px solid #dedee4;background:#fff;border-radius:17px;padding:28px;min-width:0}
+.output{background:#212846;color:white;border-color:#212846}
+.output .muted{color:#c6c9d9}
+.section-top{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+.step{background:#fce4ee;color:#9e467a;font-weight:800;padding:10px 13px;border-radius:12px}
+.output .step{background:#393f5b;color:#f5b1d0}
+label{display:block;font-size:13px;font-weight:750;margin-bottom:8px}
+.field{margin:18px 0}
+input[type=text],input[type=month]{border:1px solid #cfd1d9;border-radius:9px;padding:13px 14px;background:#fff;color:#232640;width:100%;outline-offset:2px}
+input:focus{outline:2px solid #d968a0}
+small{display:block;color:#727582;line-height:1.5;margin-top:7px}
+.error{color:#b23659;font-size:12px;min-height:16px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+hr{border:0;border-top:1px solid #e6e6eb;margin:24px 0}
+.check{display:flex;align-items:center;gap:10px;font-weight:700}.check input{width:18px;height:18px;accent-color:#a54b83}
+#previous{margin-top:18px;background:#f7f6fa;padding:18px;border-radius:12px}
+.rate{font-size:clamp(70px,11vw,122px);font-weight:800;letter-spacing:-7px;line-height:1;margin:29px 0 10px}
+.result-info{font-size:15px;color:#d8d9e3;line-height:1.6}
+.statgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:28px 0}
+.stat{background:#343b58;border-radius:11px;padding:16px}
+.stat label{color:#c5c7d3;font-size:12px}.stat strong{font-size:24px}
+.delta{padding:16px;background:#343b58;border-radius:11px;font-weight:700}
+.bar{height:9px;border-radius:15px;background:#434963;overflow:hidden;margin-top:10px}
+.bar>div{height:100%;background:#eb7ea9;width:0;transition:width .2s}
+.notes{margin:25px 0 4px;font-size:12px;color:#c9cbd6;line-height:1.65}
+.report{margin:22px 0 45px}
+.report-card{background:white;border:1px solid #dedee4;border-radius:16px;padding:28px}
+.report-card .eyebrow{color:#a24a80}
+.summary{font-size:18px;line-height:1.7;max-width:830px}
+.alert{background:#fff2d8;border-radius:9px;padding:14px 16px;color:#69501e;font-size:14px;line-height:1.5;margin-top:15px}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+button{border:0;border-radius:9px;padding:12px 18px;font-weight:750;cursor:pointer}
+.primary{background:#242b4c;color:white}.secondary{background:#efedf1;color:#222640}button:disabled{opacity:.5;cursor:not-allowed}
+button:hover:not(:disabled){filter:brightness(.94)}
+.how{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:15px 0 45px}
+.how article{background:#eeedf0;border-radius:13px;padding:19px;line-height:1.6}
+.how h3{font-size:15px}footer{padding-top:18px;padding-bottom:36px;border-top:1px solid #e4e3e8;color:#777b87;font-size:13px}
+a{color:inherit}#feedback{color:#327157;font-size:13px;padding:12px}
+[hidden]{display:none!important}
+@media(max-width:760px){.columns,.how{grid-template-columns:1fr}.hero{padding:30px 0}.card{padding:21px}.rate{letter-spacing:-4px}}
+@media(max-width:480px){.row{grid-template-columns:1fr}.statgrid{grid-template-columns:1fr 1fr}h1{letter-spacing:-1.4px}}
+@media print{header,.hero,.columns,.actions,.how,footer,.report>h2,.report>.muted{display:none!important}body{background:white}main{padding:0}.report{margin:0}.report-card{border:0;padding:0}.summary{font-size:17px}}
+</style>
+</head>
+<body>
+<header><div class="logo">the polka<span>.</span></div><span class="tag">FREE REPORTING TOOL</span></header>
+<main>
+<section class="hero"><span class="eyebrow">THE POLKA / SEARCH INSIGHTS</span><h1>AI search visibility,<br><em>made measurable.</em></h1><p>Two figures from Google Search Console. One useful way to understand how AI is changing a website's discoverability.</p></section>
+<h2>AI Search Presence Calculator</h2>
+<div class="columns">
+<section class="card">
+<div class="section-top"><span class="step">01</span><div><h3>Your Search Console numbers</h3><div class="muted">Enter matching website and reporting-period figures.</div></div></div>
+<div class="row"><div class="field"><label for="client">Client / website (optional)</label><input id="client" type="text" placeholder="e.g. The Polka" maxlength="100"></div><div class="field"><label for="month">Reporting month (optional)</label><input id="month" type="month"></div></div>
+<hr>
+<div class="field"><label for="web">Total Google Web Search impressions</label><input id="web" type="text" inputmode="numeric" placeholder="e.g. 40,000"><small>Search Console → Performance → Search results → Web → Total impressions</small></div>
+<div class="field"><label for="ai">Generative AI Search impressions</label><input id="ai" type="text" inputmode="numeric" placeholder="e.g. 8,000"><small>Search Console → Generative AI performance → Search (not Discover)</small></div>
+<div id="error" class="error" role="alert"></div>
+<hr>
+<label class="check"><input id="compare" type="checkbox"> Compare with an earlier period</label>
+<div id="previous" hidden><div class="field"><label for="prev-month">Earlier month (optional)</label><input type="month" id="prev-month"></div><div class="row"><div class="field"><label for="prev-web">Earlier Web impressions</label><input id="prev-web" type="text" inputmode="numeric" placeholder="36,000"></div><div class="field"><label for="prev-ai">Earlier AI impressions</label><input id="prev-ai" type="text" inputmode="numeric" placeholder="3,600"></div></div><div id="prev-error" class="error"></div></div>
+<div class="actions"><button type="button" id="example" class="primary">Try example</button><button type="button" id="reset" class="secondary">Clear all</button></div>
+<small>No accounts, cookies, data collection or API access. Values stay in your browser.</small>
+</section>
+<section class="card output">
+<div class="section-top"><span class="step">02</span><div><h3>Your result</h3><div class="muted">Calculated instantly</div></div></div>
+<div class="eyebrow" style="color:#efb1ce">AI SEARCH PRESENCE RATE</div>
+<div class="rate" id="rate">—</div><div class="result-info" id="explain">Enter the two figures to calculate your rate.</div>
+<div class="statgrid"><div class="stat"><label>Generative AI impressions</label><strong id="ai-stat">—</strong></div><div class="stat"><label>Total Web impressions</label><strong id="web-stat">—</strong></div></div>
+<div id="trend" hidden><div class="delta" id="change">—</div><div style="margin-top:22px;font-size:12px">Earlier rate <span id="earlier-rate"></span><div class="bar"><div id="earlier-bar"></div></div></div><div style="margin-top:14px;font-size:12px">Current rate <span id="current-rate"></span><div class="bar"><div id="current-bar"></div></div></div></div>
+<p class="notes">This is an impression-based visibility ratio, not a proportion of AI users, searchers, clicks or traffic. Generative AI impressions are already included in Google's total Web Search impressions.</p>
+</section>
+</div>
+<section class="report"><span class="eyebrow">READY FOR YOUR CLIENT REPORT</span><h2>The words to go with the numbers.</h2><p class="muted">A factual summary you can copy, export or print.</p>
+<div class="report-card" id="print-report"><span class="eyebrow">THE POLKA / SEARCH INSIGHTS</span><h3 style="margin-top:18px">AI Search Presence Rate <span id="report-rate"></span></h3><p id="summary" class="summary">Enter the figures above to generate a client-ready summary.</p><div class="alert" id="warning" hidden></div><small>Source: Google Search Console — Search results and Generative AI Search performance.</small></div>
+<div class="actions"><button id="copy" class="primary" disabled>Copy summary</button><button id="csv" class="secondary" disabled>Export CSV</button><button id="print" class="secondary" disabled>Print / save PDF</button><span id="feedback" role="status"></span></div>
+</section>
+<span class="eyebrow">HOW TO INTERPRET IT</span><h2>A couple of things worth knowing.</h2>
+<div class="how"><article><h3>01 / Match your filters</h3>Use the same site, dates, countries and devices in both reports. Compare equivalent periods where possible.</article><article><h3>02 / Don't add the figures together</h3>AI feature impressions are included in total Google Web impressions. This is a presence ratio, not two separate audiences.</article><article><h3>03 / Look at absolute numbers too</h3>A rising rate can occur even as AI impressions fall, if total search impressions fall faster.</article></div>
+</main><footer>The Polka — Making expertise discoverable. · <a href="https://support.google.com/webmasters/answer/16984139?hl=en-GB" target="_blank" rel="noopener noreferrer">Google's Generative AI Performance report</a></footer>
+<script>
+(() => {
+"use strict";
+const $=id=>document.getElementById(id);
+const ids=["web","ai","client","month","compare","prev-web","prev-ai","prev-month"];
+const fmt=n=>new Intl.NumberFormat("en-GB").format(n);
+const rate=n=>n.toFixed(1)+"%";
+const escapeCsv=v=>{let s=String(v??"");if(/^[\s]*[=+@-]/.test(s))s="'"+s;return '"'+s.replaceAll('"','""')+'"';};
+let active=null;
+function number(raw){const s=raw.trim();if(!s)return null;if(!/^(?:\d+|\d{1,3}(?:,\d{3})+|\d{1,3}(?: \d{3})+)$/.test(s))return NaN;const n=Number(s.replace(/[, ]/g,""));return Number.isSafeInteger(n)?n:NaN;}
+function validate(web,ai){if(web===null&&ai===null)return "";if(web===null||ai===null)return "Enter both impression figures.";if(!Number.isFinite(web)||!Number.isFinite(ai))return "Use non-negative whole numbers.";if(web<=0)return "Total Web Search impressions must be greater than zero.";if(ai<0||ai>web)return "AI impressions cannot exceed the total Web Search impressions. Check the reporting filters.";return "";}
+function current(){
+const w=number($("web").value),a=number($("ai").value);const e=validate(w,a);$("error").textContent=e;
+const enabled=$("compare").checked;$("previous").hidden=!enabled;
+let p=null,pe="";
+if(enabled){let pw=number($("prev-web").value),pa=number($("prev-ai").value);if(pw!==null||pa!==null){pe=validate(pw,pa);if(!pe&&$("month").value&&$("month").value===$("prev-month").value)pe="Choose a different earlier month.";if(!pe)p={web:pw,ai:pa,rate:pa/pw*100};}}
+$("prev-error").textContent=pe;
+$("trend").hidden=!p||!!e;
+if(e||w===null){$("rate").textContent="—";$("explain").textContent="Enter the two figures to calculate your rate.";$("ai-stat").textContent="—";$("web-stat").textContent="—";$("summary").textContent="Enter valid figures above to generate a client-ready summary.";$("report-rate").textContent="";$("warning").hidden=true;["copy","csv","print"].forEach(i=>$(i).disabled=true);active=null;return;}
+const r=a/w*100,client=$("client").value.trim(),month=$("month").value;const subject=client||"The website";const period=month?" for "+new Date(month+"-01T12:00:00").toLocaleDateString("en-GB",{month:"long",year:"numeric"}):" in the selected reporting period";
+$("rate").textContent=rate(r);$("explain").textContent="The site recorded "+rate(r)+" as many generative AI search impressions as total Google Web Search impressions. This does not measure unique users.";
+$("ai-stat").textContent=fmt(a);$("web-stat").textContent=fmt(w);$("report-rate").textContent="— "+rate(r);
+let summary=subject+" recorded "+fmt(a)+" generative AI Search impressions against "+fmt(w)+" total Google Web Search impressions"+period+", giving an AI Search Presence Rate of "+rate(r)+".";
+let warning="";
+if(p&&!pe){
+const diff=r-p.rate,sign=diff>0?"+":"";const d=sign+diff.toFixed(1);
+summary+=" This compares with "+rate(p.rate)+" in the previous period, a change of "+d+" percentage points.";
+$("change").textContent=d+" percentage points vs earlier period";$("earlier-rate").textContent=rate(p.rate);$("current-rate").textContent=rate(r);
+$("earlier-bar").style.width=Math.min(100,p.rate)+"%";$("current-bar").style.width=Math.min(100,r)+"%";
+if(diff>0&&a<p.ai)warning="Interpret with care: the AI presence ratio rose, but the actual number of AI impressions fell. This can happen when total Web impressions fall faster.";
+else if(diff>0&&a===p.ai)warning="Interpret with care: the ratio rose without any increase in AI impressions.";
+else if(diff<0&&a>p.ai)warning="The ratio fell, even though AI impression volume increased. Total Web impressions grew faster.";
+}
+$("summary").textContent=summary;$("warning").textContent=warning;$("warning").hidden=!warning;
+active={client,month,web:w,ai:a,rate:r,previous:p,summary,warning};
+["copy","csv","print"].forEach(i=>$(i).disabled=false);
+}
+ids.forEach(i=>$(i).addEventListener(i==="compare"?"change":"input",current));
+$("example").addEventListener("click",()=>{$("client").value="The Polka";$("month").value="2026-09";$("web").value="40,000";$("ai").value="8,000";$("compare").checked=true;$("prev-month").value="2026-08";$("prev-web").value="36,000";$("prev-ai").value="3,600";current();});
+$("reset").addEventListener("click",()=>{ids.forEach(i=>{if(i==="compare")$(i).checked=false;else $(i).value="";});$("feedback").textContent="";current();});
+$("copy").addEventListener("click",async()=>{if(!active)return;try{await navigator.clipboard.writeText(active.summary+(active.warning?"\n"+active.warning:""));$("feedback").textContent="Copied.";}catch(e){$("feedback").textContent="Clipboard unavailable; select the summary to copy.";}});
+$("csv").addEventListener("click",()=>{if(!active)return;const a=active,p=a.previous,rows=[["Metric","Value"],["Client",a.client],["Reporting month",a.month],["Total Web Search impressions",a.web],["Generative AI Search impressions",a.ai],["AI Search Presence Rate (%)",a.rate.toFixed(2)],["Previous Web impressions",p?.web??""],["Previous AI impressions",p?.ai??""],["Previous rate (%)",p?.rate.toFixed(2)??""],["Rate change (percentage points)",p?(a.rate-p.rate).toFixed(2):""],["Summary",a.summary],["Interpretation caution",a.warning]];const csv="\uFEFF"+rows.map(row=>row.map(escapeCsv).join(",")).join("\r\n");const blob=new Blob([csv],{type:"text/csv;charset=utf-8"});const url=URL.createObjectURL(blob);const link=document.createElement("a");link.href=url;link.download="polka-ai-search-presence.csv";document.body.appendChild(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);});
+$("print").addEventListener("click",()=>{if(active)window.print();});
+current();
+})();
+</script>
+</body></html>
