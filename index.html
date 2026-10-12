@@ -2,9 +2,10 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#1e2341">
+<meta name="theme-color" content="#FDF5BA">
 <meta name="description" content="A simple calculator for Google Search Console generative AI and total Web Search impressions.">
 <title>AI Search Presence Calculator | The Polka</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@600;700&family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
 :root{font-family:Inter,Arial,sans-serif;color:#222640;background:#f8f7f3;font-synthesis:none}
 *{box-sizing:border-box}body{margin:0}button,input{font:inherit}
@@ -62,12 +63,13 @@ a{color:inherit}#feedback{color:#327157;font-size:13px;padding:12px}
 @media(max-width:480px){.row{grid-template-columns:1fr}.statgrid{grid-template-columns:1fr 1fr}h1{letter-spacing:-1.4px}}
 @media print{header,.hero,.columns,.actions,.how,footer,.report>h2,.report>.muted{display:none!important}body{background:white}main{padding:0}.report{margin:0}.report-card{border:0;padding:0}.summary{font-size:17px}}
 </style>
+<link rel="stylesheet" href="./polka-theme.css">
 </head>
 <body>
-<header><div class="logo">the polka<span>.</span></div><span class="tag">FREE REPORTING TOOL</span></header>
+<header class="site-header"><a class="site-logo" href="https://www.thepolka.co.uk/" aria-label="The Polka homepage"><img src="./polka-logo.svg" alt="The Polka"></a><nav class="header-links" aria-label="Page navigation"><span class="tag">FREE REPORTING TOOL</span><a href="#calculator">The calculator ↗</a></nav></header>
 <main>
-<section class="hero"><span class="eyebrow">THE POLKA / SEARCH INSIGHTS</span><h1>AI search visibility,<br><em>made measurable.</em></h1><p>Two figures from Google Search Console. One useful way to understand how AI is changing a website's discoverability.</p></section>
-<h2>AI Search Presence Calculator</h2>
+<section class="hero"><div class="hero-copy"><span class="eyebrow">THE POLKA / FREE MARKETING TOOLS</span><h1>AI search visibility,<br><em>made measurable.</em></h1><p>A simple way to understand how much of your website’s Google Search visibility involves AI-generated results. Two numbers in, a more useful client conversation out.</p><a class="hero-link" href="#calculator">Try the calculator <span aria-hidden="true">↗</span></a></div><div class="hero-art" aria-hidden="true"><div class="big-circle"></div><div class="floating-label">AI<span style="color:#A65158">+</span><small>search insights</small></div><span class="stamp">✳</span><span class="side-note">BE DISCOVERABLE</span></div></section>
+<div class="intro" id="calculator"><div><span class="eyebrow">THE CALCULATOR</span><h2>Put the numbers to work.</h2></div><p>Copy two figures from Google Search Console and see what they mean for your clients.</p></div>
 <div class="columns">
 <section class="card">
 <div class="section-top"><span class="step">01</span><div><h3>Your Search Console numbers</h3><div class="muted">Enter matching website and reporting-period figures.</div></div></div>
@@ -84,7 +86,7 @@ a{color:inherit}#feedback{color:#327157;font-size:13px;padding:12px}
 </section>
 <section class="card output">
 <div class="section-top"><span class="step">02</span><div><h3>Your result</h3><div class="muted">Calculated instantly</div></div></div>
-<div class="eyebrow" style="color:#efb1ce">AI SEARCH PRESENCE RATE</div>
+<div class="eyebrow">AI SEARCH PRESENCE RATE</div>
 <div class="rate" id="rate">—</div><div class="result-info" id="explain">Enter the two figures to calculate your rate.</div>
 <div class="statgrid"><div class="stat"><label>Generative AI impressions</label><strong id="ai-stat">—</strong></div><div class="stat"><label>Total Web impressions</label><strong id="web-stat">—</strong></div></div>
 <div id="trend" hidden><div class="delta" id="change">—</div><div style="margin-top:22px;font-size:12px">Earlier rate <span id="earlier-rate"></span><div class="bar"><div id="earlier-bar"></div></div></div><div style="margin-top:14px;font-size:12px">Current rate <span id="current-rate"></span><div class="bar"><div id="current-bar"></div></div></div></div>
@@ -92,12 +94,12 @@ a{color:inherit}#feedback{color:#327157;font-size:13px;padding:12px}
 </section>
 </div>
 <section class="report"><span class="eyebrow">READY FOR YOUR CLIENT REPORT</span><h2>The words to go with the numbers.</h2><p class="muted">A factual summary you can copy, export or print.</p>
-<div class="report-card" id="print-report"><span class="eyebrow">THE POLKA / SEARCH INSIGHTS</span><h3 style="margin-top:18px">AI Search Presence Rate <span id="report-rate"></span></h3><p id="summary" class="summary">Enter the figures above to generate a client-ready summary.</p><div class="alert" id="warning" hidden></div><small>Source: Google Search Console — Search results and Generative AI Search performance.</small></div>
+<div class="report-card" id="print-report"><div class="report-heading"><img src="./polka-logo.svg" alt="The Polka"><span class="eyebrow">SEARCH INSIGHTS</span></div><h3 style="margin-top:18px">AI Search Presence Rate <span id="report-rate"></span></h3><p id="summary" class="summary">Enter the figures above to generate a client-ready summary.</p><div class="alert" id="warning" hidden></div><small>Source: Google Search Console — Search results and Generative AI Search performance.</small></div>
 <div class="actions"><button id="copy" class="primary" disabled>Copy summary</button><button id="csv" class="secondary" disabled>Export CSV</button><button id="print" class="secondary" disabled>Print / save PDF</button><span id="feedback" role="status"></span></div>
 </section>
 <span class="eyebrow">HOW TO INTERPRET IT</span><h2>A couple of things worth knowing.</h2>
 <div class="how"><article><h3>01 / Match your filters</h3>Use the same site, dates, countries and devices in both reports. Compare equivalent periods where possible.</article><article><h3>02 / Don't add the figures together</h3>AI feature impressions are included in total Google Web impressions. This is a presence ratio, not two separate audiences.</article><article><h3>03 / Look at absolute numbers too</h3>A rising rate can occur even as AI impressions fall, if total search impressions fall faster.</article></div>
-</main><footer>The Polka — Making expertise discoverable. · <a href="https://support.google.com/webmasters/answer/16984139?hl=en-GB" target="_blank" rel="noopener noreferrer">Google's Generative AI Performance report</a></footer>
+</main><footer><div class="footer-shell"><img src="./polka-logo.svg" alt="The Polka"><p>Making expertise discoverable. · <a href="https://support.google.com/webmasters/answer/16984139?hl=en-GB" target="_blank" rel="noopener noreferrer">Google’s Generative AI Performance report ↗</a></p></div></footer>
 <script>
 (() => {
 "use strict";
